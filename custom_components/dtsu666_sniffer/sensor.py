@@ -26,8 +26,11 @@ class Dtsu666Sensor(SensorEntity):
         self._attr_native_unit_of_measurement = unit
         self._attr_device_class = SensorDeviceClass(dclass)
         self._attr_state_class = SensorStateClass(sclass)
-        if dclass == "power_factor":
-            self._attr_suggested_display_precision = 3
+        # meterresolutie: 0,1 V, 0,001 A, 0,1 W, 0,001 PF, 0,01 Hz, 0,01 kWh
+        self._attr_suggested_display_precision = {
+            "voltage": 1, "current": 2, "power": 0, "reactive_power": 0,
+            "power_factor": 3, "frequency": 2, "energy": 2,
+        }.get(dclass)
 
     async def async_added_to_hass(self):
         self.async_on_remove(async_dispatcher_connect(
