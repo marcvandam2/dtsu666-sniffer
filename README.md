@@ -18,8 +18,9 @@ fast data without adding load to the bus.
 | Current L1 / L2 / L3 (fast), highest phase | `|P| / U` with the last measured voltage | ~7× per second |
 | Current L1 / L2 / L3 (measured) | switch *Ask for current* on: own request | every 1 s (configurable) |
 
-Entity names are in Dutch (*Vermogen*, *Spanning*, *Stroom*, *Stroom hoogste fase*,
-switch *Stroom zelf meevragen*).
+Entities: *Power L1-L3 / total*, *Energy import / export*, *Voltage L1-L3*,
+*Current L1-L3 (fast)*, *Current highest phase*, *Current L1-L3* (measured), and the
+switch *Ask meter for current*.
 
 ### Current from power
 
@@ -28,7 +29,7 @@ A fuse reacts to current, not power. Without asking the meter, current is derive
 low power factor the real current is higher. For heavy resistive loads (PF ≈ 1, e.g.
 instantaneous water heaters) it is accurate.
 
-Turn on the switch **Stroom zelf meevragen** when you need exact current: the
+Turn on the switch **Ask meter for current** when you need exact current: the
 integration then asks the meter for voltage and current every second, and the fast
 current sensors start from the measured current and follow the power changes in
 between (`I = I_measured + Δ|P| / U`). The switch is off after every restart.
@@ -85,7 +86,7 @@ Updates show up in HACS like any other integration.
 2. Fill in the IP address of the RS485 gateway (port usually `502`), mode `sniff`,
    meter address `1`, and click **Submit**.
 3. A device **DTSU666** appears with the sensors and the switch
-   **Stroom zelf meevragen**. Power should update several times per second as soon as
+   **Ask meter for current**. Power should update several times per second as soon as
    the Deye is running (with the inverter off there is no bus traffic to listen to).
 
 Options can be changed later with **Configure** on the integration.

@@ -99,7 +99,7 @@ class Dtsu666Bus:
         self.u_interval = u_interval  # spanning vragen elke n s, 0 = nooit
         self._task: asyncio.Task | None = None
         self.last_seen = 0.0
-        self.ask = False  # schakelaar 'Stroom zelf meevragen', standaard uit
+        self.ask = False  # switch 'Ask meter for current', off by default
 
     def start(self, hass):
         self._task = hass.async_create_background_task(self._run(), "dtsu666_sniffer")

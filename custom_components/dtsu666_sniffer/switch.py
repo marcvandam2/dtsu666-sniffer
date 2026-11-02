@@ -1,4 +1,4 @@
-"""Schakelaar 'Stroom zelf meevragen': standaard uit, ook na een herstart."""
+"""Schakelaar 'Ask meter for current': standaard uit, ook na een herstart."""
 from __future__ import annotations
 
 from homeassistant.components.switch import SwitchEntity
@@ -17,7 +17,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class AskSwitch(SwitchEntity):
     _attr_has_entity_name = True
     _attr_should_poll = False
-    _attr_name = "Stroom zelf meevragen"
+    _attr_name = "Ask meter for current"
     _attr_icon = "mdi:lightning-bolt-circle"
 
     def __init__(self, entry, rt):

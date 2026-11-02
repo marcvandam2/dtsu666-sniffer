@@ -10,7 +10,7 @@ from .const import DOMAIN, EXTRA, REGS
 async def async_setup_entry(hass, entry, async_add_entities):
     rt = hass.data[DOMAIN][entry.entry_id]
     device = DeviceInfo(identifiers={(DOMAIN, entry.entry_id)}, name="DTSU666",
-                        manufacturer="Chint", model="DTSU666 (meegelezen)")
+                        manufacturer="Chint", model="DTSU666 (sniffed)")
     async_add_entities(Dtsu666Sensor(entry, rt, device, *spec) for spec in [*REGS.values(), *EXTRA])
 
 
