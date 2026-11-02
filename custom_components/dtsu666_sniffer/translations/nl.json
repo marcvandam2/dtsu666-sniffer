@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DTSU666 Sniffer",
+        "description": "sniff = Waveshare channel in transparent mode (protocol None): passively reads the Deye <-> DTSU666 traffic. poll = channel in Modbus TCP mode: the integration asks the meter itself (a second master on the bus).",
+        "data": {
+          "host": "Gateway IP",
+          "port": "TCP port",
+          "mode": "Mode",
+          "slave": "Meter address",
+          "interval": "With 'ask for current' on: ask voltage + current every (s)",
+          "u_entity_l1": "Voltage L1 sensor (for current = |P| / U)",
+          "u_entity_l2": "Voltage L2 sensor (for current = |P| / U)",
+          "u_entity_l3": "Voltage L3 sensor (for current = |P| / U)",
+          "u_interval": "Ask the meter for voltage every (s); 0 = never"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "DTSU666 Sniffer",
+        "data": {
+          "host": "Gateway IP",
+          "port": "TCP port",
+          "mode": "Mode",
+          "slave": "Meter address",
+          "interval": "With 'ask for current' on: ask voltage + current every (s)",
+          "u_entity_l1": "Voltage L1 sensor (for current = |P| / U)",
+          "u_entity_l2": "Voltage L2 sensor (for current = |P| / U)",
+          "u_entity_l3": "Voltage L3 sensor (for current = |P| / U)",
+          "u_interval": "Ask the meter for voltage every (s); 0 = never"
+        }
+      }
+    }
+  }
+}

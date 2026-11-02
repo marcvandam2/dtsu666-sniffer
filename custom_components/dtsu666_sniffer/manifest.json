@@ -1,0 +1,13 @@
+{
+  "domain": "dtsu666_sniffer",
+  "name": "DTSU666 Sniffer (Deye/Chint)",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://github.com/marcvandam2/dtsu666-sniffer",
+  "iot_class": "local_push",
+  "requirements": [],
+  "codeowners": [
+    "@marcvandam2"
+  ],
+  "issue_tracker": "https://github.com/marcvandam2/dtsu666-sniffer/issues"
+}
