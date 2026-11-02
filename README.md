@@ -51,13 +51,51 @@ The integration detects the format by itself. The meter address is usually 1.
 
 ## Installation
 
-HACS: add this repository as a custom repository (category *Integration*), install,
-restart Home Assistant.
+### Option A: HACS (recommended)
 
-Manual: copy `custom_components/dtsu666_sniffer` to `config/custom_components/`
-and restart.
+1. In Home Assistant open **HACS**.
+2. Top right **⋮ → Custom repositories**.
+3. Repository: `https://github.com/marcvandam2/dtsu666-sniffer`, type **Integration**,
+   click **Add**.
+4. Search for **DTSU666 Sniffer** in HACS, open it and click **Download**.
+5. Restart Home Assistant (**Settings → System → ⏻ → Restart Home Assistant**).
 
-Then *Settings → Devices & services → Add integration → DTSU666 Sniffer*.
+Updates show up in HACS like any other integration.
+
+### Option B: manual
+
+1. Download this repository (**Code → Download ZIP**) and unpack it.
+2. Copy the folder `custom_components/dtsu666_sniffer` into the `custom_components`
+   folder of your Home Assistant configuration, so you end up with
+   `/config/custom_components/dtsu666_sniffer/manifest.json`.
+   Use the *Samba share*, *Studio Code Server* or *Terminal & SSH* add-on, e.g. over SSH:
+
+   ```bash
+   cd /config
+   mkdir -p custom_components
+   wget -qO- https://github.com/marcvandam2/dtsu666-sniffer/archive/refs/heads/main.tar.gz \
+     | tar xz --strip-components=2 -C custom_components dtsu666-sniffer-main/custom_components/dtsu666_sniffer
+   ```
+
+3. Restart Home Assistant.
+
+### Add the integration
+
+1. **Settings → Devices & services → + Add integration → DTSU666 Sniffer**.
+2. Fill in the IP address of the RS485 gateway (port usually `502`), mode `sniff`,
+   meter address `1`, and click **Submit**.
+3. A device **DTSU666** appears with the sensors and the switch
+   **Stroom zelf meevragen**. Power should update several times per second as soon as
+   the Deye is running (with the inverter off there is no bus traffic to listen to).
+
+Options can be changed later with **Configure** on the integration.
+
+### Troubleshooting
+
+* All sensors *unavailable*: check that the gateway is reachable on the TCP port, that
+  the Deye is on (it is the one asking the meter), and the meter address.
+* Only power and energy, no voltage: set *Voltage interval* above 0.
+* Logs: **Settings → System → Logs**, filter on `dtsu666_sniffer`.
 
 | Option | Meaning |
 |---|---|
