@@ -36,7 +36,10 @@ REGS = {
     0x101E: ("e_imp", "Energy import", "kWh", 1.0, "energy", "total_increasing"),
     0x1028: ("e_exp", "Energy export", "kWh", 1.0, "energy", "total_increasing"),
 }
-# berekend uit de registers hierboven
+# schrijven naar HA: hooguit eens per MIN_WRITE_S, of meteen bij een sprong van JUMP
+MIN_WRITE_S = 1.0
+JUMP = {"current": 1.0, "power": 250.0}
+# berekend uit de registers hierboven (stroom met teken: + import, - export)
 EXTRA = [
     ("i_snel_a", "Current L1 (fast)", "A", 1.0, "current", "measurement"),
     ("i_snel_b", "Current L2 (fast)", "A", 1.0, "current", "measurement"),

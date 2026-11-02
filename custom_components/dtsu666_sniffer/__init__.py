@@ -49,7 +49,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 snel = state[i] + (abs(state[p]) - state[f"_pbase_{f}"]) / volt
             else:
                 snel = abs(state[p]) / volt
-            state[f"i_snel_{f}"] = round(max(snel, 0.0), 2)
+            # teken van het vermogen: + import, - export
+            state[f"i_snel_{f}"] = round(max(snel, 0.0) * (-1 if state[p] < 0 else 1), 2)
         async_dispatcher_send(hass, signal)
 
     bus = Dtsu666Bus(cfg[CONF_HOST], cfg[CONF_PORT], cfg[CONF_MODE],

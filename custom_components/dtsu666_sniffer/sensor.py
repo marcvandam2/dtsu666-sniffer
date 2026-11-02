@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import time
+
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
+from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
 
-from .const import DOMAIN, EXTRA, REGS
+from .const import DOMAIN, EXTRA, JUMP, MIN_WRITE_S, REGS
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -31,10 +34,28 @@ class Dtsu666Sensor(SensorEntity):
             "voltage": 1, "current": 2, "power": 0, "reactive_power": 0,
             "power_factor": 3, "frequency": 2, "energy": 2,
         }.get(dclass)
+        self._jump = JUMP.get(dclass)
+        self._last_t = 0.0
+        self._last_v = None
+        self._last_avail = None
 
     async def async_added_to_hass(self):
         self.async_on_remove(async_dispatcher_connect(
-            self.hass, self._rt["signal"], self.async_write_ha_state))
+            self.hass, self._rt["signal"], self._update))
+
+    @callback
+    def _update(self):
+        # Hooguit eens per MIN_WRITE_S naar HA (en dus naar de database), behalve bij
+        # een sprong van minstens JUMP: dan meteen (een doorstromer die aanslaat).
+        v, now, avail = self.native_value, time.monotonic(), self.available
+        if avail == self._last_avail and v == self._last_v:
+            return
+        if (avail == self._last_avail and now - self._last_t < MIN_WRITE_S
+                and not (self._jump and v is not None and self._last_v is not None
+                         and abs(v - self._last_v) >= self._jump)):
+            return
+        self._last_t, self._last_v, self._last_avail = now, v, avail
+        self.async_write_ha_state()
 
     @property
     def available(self):

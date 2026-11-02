@@ -22,6 +22,15 @@ Entities: *Power L1-L3 / total*, *Energy import / export*, *Voltage L1-L3*,
 *Current L1-L3 (fast)*, *Current L1-L3* (measured), and the
 switch *Ask meter for current*.
 
+### Sign and update rate
+
+*Current L1-L3 (fast)* carries the sign of the power: positive = import, negative =
+export (like a DSMR/P1 meter), so automations can use `above: 24` and `below: -24`.
+
+The bus delivers ~7 readings per second. To keep the recorder database small, a sensor
+writes its state at most once per second, except immediately on a jump of at least
+1 A (current) or 250 W (power), so a heavy load switching on is seen at once.
+
 ### Current from power
 
 A fuse reacts to current, not power. Without asking the meter, current is derived as
