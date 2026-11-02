@@ -15,11 +15,11 @@ fast data without adding load to the bus.
 | Power L1 / L2 / L3 / total | Deye's own requests (listen only) | ~7× per second |
 | Energy import / export (kWh) | Deye's own requests (listen only) | ~0.7× per second |
 | Voltage L1 / L2 / L3 | one own request, right after a Deye answer | every 60 s (configurable, 0 = never) |
-| Current L1 / L2 / L3 (fast), highest phase | `|P| / U` with the last measured voltage | ~7× per second |
+| Current L1 / L2 / L3 (fast) | `|P| / U` with the last measured voltage | ~7× per second |
 | Current L1 / L2 / L3 (measured) | switch *Ask for current* on: own request | every 1 s (configurable) |
 
 Entities: *Power L1-L3 / total*, *Energy import / export*, *Voltage L1-L3*,
-*Current L1-L3 (fast)*, *Current highest phase*, *Current L1-L3* (measured), and the
+*Current L1-L3 (fast)*, *Current L1-L3* (measured), and the
 switch *Ask meter for current*.
 
 ### Current from power

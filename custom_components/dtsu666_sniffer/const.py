@@ -41,7 +41,6 @@ EXTRA = [
     ("i_snel_a", "Current L1 (fast)", "A", 1.0, "current", "measurement"),
     ("i_snel_b", "Current L2 (fast)", "A", 1.0, "current", "measurement"),
     ("i_snel_c", "Current L3 (fast)", "A", 1.0, "current", "measurement"),
-    ("i_max", "Current highest phase", "A", 1.0, "current", "measurement"),
 ]
 # vraag in de sniff-modus: Ua..Uc, Ia..Ic en Pt (14 registers; de Deye vraagt 6 en 12)
 CURRENT_BLOCK = (0x2006, 14)

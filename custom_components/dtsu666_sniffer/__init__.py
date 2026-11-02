@@ -50,9 +50,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             else:
                 snel = abs(state[p]) / volt
             state[f"i_snel_{f}"] = round(max(snel, 0.0), 2)
-        snel = [state[k] for k in ("i_snel_a", "i_snel_b", "i_snel_c") if k in state]
-        if snel:
-            state["i_max"] = max(snel)
         async_dispatcher_send(hass, signal)
 
     bus = Dtsu666Bus(cfg[CONF_HOST], cfg[CONF_PORT], cfg[CONF_MODE],
